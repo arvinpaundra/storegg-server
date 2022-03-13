@@ -17,14 +17,22 @@
       <td>
         <ul class="list-inline">
           <li class="list-inline-item">
-            <img width="48px" height="48px" src="http://localhost:3000/uploads/<%= transaction[i].historyVoucherTopup.thumbnail %>" alt="tumbnail game" />
+            <img
+              width="48px"
+              height="48px"
+              src="https://storegg-serverapp.herokuapp.com/uploads/<%= transaction[i].historyVoucherTopup.thumbnail %>"
+              alt="tumbnail game"
+            />
           </li>
         </ul>
         <%= transaction[i]?.historyVoucherTopup?.gameName %>
         <br />
         <%= transaction[i]?.historyVoucherTopup?.category %>
       </td>
-      <td><%= transaction[i]?.historyVoucherTopup?.coinQuantity %> <%= transaction[i]?.historyVoucherTopup?.coinName %></td>
+      <td>
+        <%= transaction[i]?.historyVoucherTopup?.coinQuantity %> <%=
+        transaction[i]?.historyVoucherTopup?.coinName %>
+      </td>
       <td><%= transaction[i].value %></td>
       <td>
         <% if (transaction[i].status === 'pending') { %>
@@ -37,13 +45,21 @@
       </td>
       <td><%= transaction[i]?.player?.name ?? '-' %></td>
       <td>
-        <form style="display: inline-block" action="/transaction/status/<%= transaction[i]._id %>?status=failed&_method=PUT" method="POST">
+        <form
+          style="display: inline-block"
+          action="/transaction/status/<%= transaction[i]._id %>?status=failed&_method=PUT"
+          method="POST"
+        >
           <button class="btn btn-danger btn-sm">
             <i class="fas fa-times"></i>
             Tolak
           </button>
         </form>
-        <form style="display: inline-block" action="/transaction/status/<%= transaction[i]._id %>?status=success&_method=PUT" method="POST">
+        <form
+          style="display: inline-block"
+          action="/transaction/status/<%= transaction[i]._id %>?status=success&_method=PUT"
+          method="POST"
+        >
           <button class="btn btn-success btn-sm">
             <i class="fas fa-check"></i>
             Terima
