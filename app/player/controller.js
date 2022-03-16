@@ -33,12 +33,23 @@ module.exports = {
         .populate('nominals')
         .populate('user', '_id name phoneNumber');
 
+      const payment = await Payment.find().populate('banks');
+
+      if (!payment) {
+        res.status(404).json({ message: 'Payment tidak ditemukan!' });
+      }
+
       if (!voucher) {
         return res.status(404).json({
           message: 'Voucher game tidak ditemukan!',
         });
       } else {
-        return res.status(200).json({ data: voucher });
+        return res.status(200).json({
+          data: {
+            detail: voucher,
+            payment: payment,
+          },
+        });
       }
     } catch (err) {
       res.status(500).json({
@@ -316,7 +327,7 @@ module.exports = {
               ...payload,
               avatar: filename,
             },
-            { new: true, runValidators: true }
+            { new: true, runValidators: true },
           );
 
           res.status(201).json({
@@ -334,7 +345,7 @@ module.exports = {
             _id: req.player._id,
           },
           payload,
-          { new: true, runValidators: true }
+          { new: true, runValidators: true },
         );
 
         res.status(201).json({
