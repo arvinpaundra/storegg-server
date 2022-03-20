@@ -21,7 +21,7 @@ const authRouter = require('./app/auth/router');
 
 var app = express();
 const URL = '/api/v1';
-app.use(cors());
+app.use(cors({ origin: '*' }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +33,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {},
-  })
+  }),
 );
 app.use(flash());
 app.use(methodOverride('_method'));
