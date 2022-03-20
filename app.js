@@ -21,7 +21,7 @@ const authRouter = require('./app/auth/router');
 
 var app = express();
 const URL = '/api/v1';
-app.use(cors({ origin: '*' }));
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
